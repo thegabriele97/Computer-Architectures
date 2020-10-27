@@ -4,16 +4,16 @@
                     #
 
     .data
-a:      .byte       1, 2, 3, 4, 5, 7, 8
+a:      .byte       1, 2, 3, 4, 5, 7, 8, 1, 2, 3, 4, 5, 7, 8, 1, 2, 3, 4, 5, 7, 8, 1, 2, 3, 4, 5, 7, 8, 1, 2
 
-b:      .byte       5, 5, 5, 5, 5, 5, 5
+b:      .byte       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 
-res:     .space      0x7                         # 7 bytes of storage
+res:     .space      0x1e                       # 30 bytes of storage
 
     .text
 
 main:
-        daddui      r1, r0, 0x7                 # r1 <-- 7                  # number of items in r1        
+        daddui      r1, r0, 0x1e                # r1 <-- 14                 # number of items in r1        
         daddu       r2, r0, r0                  # r2 <-- 0                  # used as index
         j           check
 
