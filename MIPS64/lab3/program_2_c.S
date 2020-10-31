@@ -62,29 +62,29 @@ loop:                                   # loop unrolling
         s.d         f6, v6(r9)          # f6 --> v6[r9]         # FROM THE FIRST SEGMENT
 
 
+        mul.d       f7, f7, f2          # f7 <-- f7 * f2
         mul.d       f6, f5, f3          # f6 <-- f5 * f3        # FROM THE THIRD SEGMENT
         s.d         f5, v5(r11)         # f5 --> v5[r9]         # FROM THE THIRD SEGMENT
-        mul.d       f7, f7, f2          # f7 <-- f7 * f2
 
         add.d       f14, f13, f12       # f7 <-- f6 + f4
         s.d         f7, v7(r9)          # f7 --> v7[r9]
 
         daddui      r9, r9, 0x18        # r9 <-- r9 + 8         # computing next index
+        add.d       f17, f6, f16         # f7 <-- f6 + f4
        
                 
         s.d         f13, v6(r10)        # f6 --> v6[r9]
         mul.d       f14, f14, f9        # f7 <-- f7 * f2
-        add.d       f7, f6, f16         # f7 <-- f6 + f4
         s.d         f6, v6(r11)         # f6 --> v6[r9]
 
+        mul.d       f17, f17, f15         # f7 <-- f7 * f2
         s.d         f14, v7(r10)        # f7 --> v7[r9]
 
         daddui      r10, r10, 0x18      # r9 <-- r9 + 8         # computing next index
         #################################################################################################
         
                 
-        mul.d       f7, f7, f15         # f7 <-- f7 * f2
-        s.d         f7, v7(r11)         # f7 --> v7[r9]
+        s.d         f17, v7(r11)         # f7 --> v7[r9]
 
 check:
         bne         r9, r8, loop        # if r9 != r8, loop
