@@ -29,9 +29,9 @@ main:
         dadd        r9, r0, r0          # r9 <-- 0          # used as index
 
         dsll        r8, r8, 0x3         # r8 <-- r8 << 3    # multiply r8 by 8 because index increments by 8 at each loop
+        l.d         f1, v1(r9)          # f1 <-- v1[r9]
 
 loop:
-        l.d         f1, v1(r9)          # f1 <-- v1[r9]
         l.d         f2, v2(r9)          # f2 <-- v2[r9]
         l.d         f3, v3(r9)          # f3 <-- v3[r9]
         
@@ -51,7 +51,7 @@ loop:
 
 check:
         bne         r9, r8, loop        # if r9 != r8, loop
-        nop
+        l.d         f1, v1(r9)          # f1 <-- v1[r9]
 
 then:
         halt
