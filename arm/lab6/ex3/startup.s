@@ -124,33 +124,25 @@ CRP_Key         DCD     0xFFFFFFFF
 
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]                                            
-                LDR     R0, =Reset_Handler
 				
-				MOV		R0, #0xAAAAAAAA
-				MOV		R1, #0x0000000E
+				MOV		R0, #0xFFFF1FFF
+				MOV		R1, #0xAAAAAAAA
 				
-				MOV		R2, #0x00000001
-				MOV		R3,	#0x00000000
-				MOV		R4,	#0x00000000
+				EOR		R2, R0, R1				; R2 = R0 ^ R1
+												; I want to compute the bitwise diff
+												; because an even number - odd one is odd
 				
-Loop			TST		R0, R2
-				ADDNE	R3, #0x1
+				EOR		R2, R2, LSR #0x10		; R2 ^= (R2 >> 16)
+				EOR		R2, R2, LSR #0x08		; R2 ^= (R2 >> 8)
+				EOR		R2, R2, LSR #0x04		; R2 ^= (R2 >> 4)
+				EOR		R2, R2, LSR #0x02		; R2 ^= (R2 >> 2)
+				EOR		R2, R2, LSR #0x01		; R2 ^= (R2 >> 1)
 				
-				TST		R1, R2
-				ADDNE	R4, #0x1
-				
-				LSLS	R2, #0x1
-				BNE		Loop
-				
-				AND		R3, #0x1
-				AND		R4, #0x1
-				CMP		R3, R4
-				
+				ANDS	R2, #0x00000001			; if lsb = 1: odd
 				ANDEQ	R0, R0, #0x00FFFFFF
 				ORREQ	R0, R0, #0x000000FF
 				MRSNE	R1, APSR
-				
-                BX      R0
+
                 ENDP
 
 ; Dummy Exception Handlers (infinite loops which can be modified)
