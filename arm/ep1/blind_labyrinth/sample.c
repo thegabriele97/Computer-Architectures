@@ -29,7 +29,7 @@ int main (void) {
   LED_init();
   BUTTON_init();
 	
-	init_RIT(0x004c4b40);			
+	init_RIT(0x007A1200);			 // RIT		  ->   80 ms Interrut
 	init_timer(0, 0x002625A0); // Timer 0 ->  100 ms Interrupt (10 Hz), to handle running led
 	init_timer(1, 0x0017D784); // Timer 1 -> 62.5 ms Interrupt (16 Hz), to handle direction leds
 	
