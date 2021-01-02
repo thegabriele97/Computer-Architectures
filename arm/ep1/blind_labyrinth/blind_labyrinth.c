@@ -85,26 +85,22 @@ void update_obstacles_val(game_t *game) {
 	game->robot.dir_obstacle.is_dist2_obstacle = 0;
 	game->robot.dir_obstacle.is_dist5_obstacle = 0;
 	
-	for (dist = 1; dist <= 2 && !is_exit_found; dist++) {
+	for (dist = 1; dist <= 5 && !is_exit_found; dist++) {
 		robot_cp.curr_pos = next_pos;
 		next_pos = get_next_pos(robot_cp);
 		
-		game->robot.dir_obstacle.is_dist2_obstacle |= IS_OBSTACLE(game, next_pos);
-		is_exit_found |= IS_EXIT(game, next_pos);
-	}
-	
-	for (dist = 3; dist <= 5 && !is_exit_found; dist++) {
-		robot_cp.curr_pos = next_pos;
-		next_pos = get_next_pos(robot_cp);
-		
-		game->robot.dir_obstacle.is_dist5_obstacle |= IS_OBSTACLE(game, next_pos);
+		if (dist <= 2) {
+			game->robot.dir_obstacle.is_dist2_obstacle |= IS_OBSTACLE(game, next_pos);
+		} else {
+			game->robot.dir_obstacle.is_dist5_obstacle |= IS_OBSTACLE(game, next_pos);
+		}
+
 		is_exit_found |= IS_EXIT(game, next_pos);
 	}
 	
 	game->robot.dir_obstacle.is_dist0_obstacle &= !is_exit_found;
 	game->robot.dir_obstacle.is_dist2_obstacle &= !is_exit_found;
 	game->robot.dir_obstacle.is_dist5_obstacle &= !is_exit_found;
-	
 }
 
 pos_t get_next_pos(robot_t robot) {

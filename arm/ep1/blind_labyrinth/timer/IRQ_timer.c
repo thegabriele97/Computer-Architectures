@@ -40,8 +40,8 @@ void TIMER0_IRQHandler (void) {
 		count = (count + 1) % 0xa;
 	}
 	
-  LPC_TIM0->IR = 1;			/* clear interrupt flag */
-  return;
+	LPC_TIM0->IR = 1;			/* clear interrupt flag */
+	return;
 }
 
 
@@ -76,8 +76,8 @@ void TIMER1_IRQHandler (void) {
 		
 	count = (count + 1) % max_cnt;
 	
-  LPC_TIM1->IR = 1;			/* clear interrupt flag */
-  return;
+	LPC_TIM1->IR = 1;			/* clear interrupt flag */
+	return;
 }
 
 /******************************************************************************
