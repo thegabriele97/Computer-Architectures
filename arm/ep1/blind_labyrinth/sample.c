@@ -33,8 +33,8 @@ int main (void) {
 	init_timer(0, 0x002625A0); // Timer 0 ->  100 ms Interrupt (10 Hz), to handle running led
 	init_timer(1, 0x0017D784); // Timer 1 -> 62.5 ms Interrupt (16 Hz), to handle direction leds
 	
-	LPC_TIM0->MCR &= ~(1 << 2); // Timer 0 -> disabling Stop on match. Reset on match is still enabled
-	LPC_TIM1->MCR &= ~(1 << 5); // Timer 1 -> disabling Stop on match. Reset on match is still enabled
+	LPC_TIM0->MCR &= ~(1 << 2); // Timer 0 -> disabling Stop on MR0. Reset on match is still enabled
+	LPC_TIM1->MCR &= ~(1 << 2); // Timer 1 -> disabling Stop on MR0. Reset on match is still enabled
 	
 	LPC_SC->PCON |= 0x1;
 	LPC_SC->PCON &= ~(0x2);						
