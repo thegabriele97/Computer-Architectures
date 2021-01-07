@@ -12,32 +12,44 @@
 #include "../led/led.h"
 #include "stdint.h"
 #include "../blind_labyrinth.h"
+#include "stdbool.h"
 
 extern game_t game_bl;
+bool is_first_excluded = true;
 
 void TIMER0_IRQHandler (void) {
 	static uint8_t count = 0x0;
-	
+
 	if (game_bl.robot.dir_obstacle.is_dist0_obstacle) {
 		if (count) {
-			LED_On(LED_RUN);
-		} else {
 			LED_Off(LED_RUN);
+		} else {
+			LED_On(LED_RUN);
 		}
 		
 		count = (count + 1) & 0x1;
 	} else {
-		if (count < 0x5) {
-			LED_Off(LED_RUN);
-		} else if (count < 0xa) {
+		/*
+		 * the flag is useful in order to not trigger for the first 0..900 ms the activation of the robot
+		 * or the blink of the led. This is because for each movement of the robot, the button
+		 * shall stay pressed for at least 1 second
+		 */
+		if (count < 0x5 && !is_first_excluded) { 
 			LED_On(LED_RUN);
+		} else if (count < 0xa) {
+			LED_Off(LED_RUN);
 		}
 		
-		if (count == 0x5) {
+		if (count == 0x0 && !is_first_excluded) { 
 			go_on(&game_bl);
 		}
 		
-		count = (count + 1) % 0xa;
+		/*
+		 * as soon as count reaches for the first time 0x9, the flag will be setted of for ever
+		 * or until the button is released and pressed again
+		 */
+		is_first_excluded &= !(count == 0x9);
+		count = (count + 1) % 0xa; 
 	}
 	
 	LPC_TIM0->IR = 1;			/* clear interrupt flag */

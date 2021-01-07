@@ -14,6 +14,7 @@ extern game_t game_bl;
 void RIT_IRQHandler (void) {
 	static bool is_run_pressed = false;
 	static bool is_rot_pressed = false;
+	extern bool is_first_excluded;
 	static uint8_t count = 0x0;
 	
 	if (is_exit_reached(game_bl)) {
@@ -37,7 +38,12 @@ void RIT_IRQHandler (void) {
 		count = (count + 1) % 0x14;
 	} else {
 		if (!is_run_pressed && IS_RUNBTN_PRESSED()) { // Intercepts button press
-			enable_timer(0);
+			
+			is_first_excluded = true;
+			if (!(LPC_TIM0->TCR & 0x1)) { // Timer enabled once. The check is done in order to remove bouncing effects
+				enable_timer(0);
+			}
+			
 			is_run_pressed = true;
 		} else if (is_run_pressed && !IS_RUNBTN_PRESSED()) { // Intercepts button release
 			disable_timer(0);
