@@ -6,8 +6,8 @@
 #include "stdbool.h"
 #include "../blind_labyrinth.h"
 
-#define IS_RUNBTN_PRESSED()				(((LPC_GPIO2->FIOPIN >> 0xc) & 0x1) == 0)		
-#define IS_ROTBTN_PRESSED()				(((LPC_GPIO2->FIOPIN >> 0xb) & 0x1) == 0)	
+#define IS_RUNBTN_PRESSED()				(((LPC_GPIO2->FIOPIN >> 0xc) & 0x1) == 0 && ((LPC_PINCON->PINSEL4 & (1 << 24)) == 0))		
+#define IS_ROTBTN_PRESSED()				(((LPC_GPIO2->FIOPIN >> 0xb) & 0x1) == 0 && ((LPC_PINCON->PINSEL4 & (1 << 22)) == 0))	
 
 extern game_t game_bl;
 
@@ -48,7 +48,10 @@ void RIT_IRQHandler (void) {
 		} else if (is_run_pressed && !IS_RUNBTN_PRESSED()) { // Intercepts button release
 			disable_timer(0);
 			LED_Off(LED_RUN);
+			
 			is_run_pressed = false;
+			LPC_PINCON->PINSEL4 |= (1 << 24); // Re enabling interrupt
+			disable_RIT();
 		}
 		
 		if (!is_run_pressed) { // Rot is intercepted only when run is not pressed
@@ -59,6 +62,10 @@ void RIT_IRQHandler (void) {
 			}
 			
 			is_rot_pressed = IS_ROTBTN_PRESSED();
+			if (!is_rot_pressed) {
+				LPC_PINCON->PINSEL4 |= (1 << 22); // Re enabling interrupt
+				disable_RIT();
+			}
 		}
 	}
 	

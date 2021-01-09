@@ -19,7 +19,6 @@ void EINT0_IRQHandler(void) {
 	
 	game_bl = new_game(new_robot());
 	
-	enable_RIT();
 	enable_timer(1);
 	NVIC_DisableIRQ(EINT0_IRQn);	// Deactivated until reset
 	
@@ -29,10 +28,14 @@ void EINT0_IRQHandler(void) {
 
 /* KEY1	*/
 void EINT1_IRQHandler(void) {
+	LPC_PINCON->PINSEL4 &= ~(1 << 22); // pin 11 as GPIO
+	enable_RIT();
 	LPC_SC->EXTINT &= (1 << 1);
 }
 
 /* KEY2	*/
 void EINT2_IRQHandler(void) {	
+	LPC_PINCON->PINSEL4 &= ~(1 << 24); // pin 12 as GPIO
+	enable_RIT();
   LPC_SC->EXTINT &= (1 << 2); 
 }

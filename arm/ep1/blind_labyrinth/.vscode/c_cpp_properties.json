@@ -9,9 +9,7 @@
                 "c:\\Users\\gabri\\OneDrive\\Desktop\\Computer Architectures\\arm\\ep1\\blind_labyrinth\\led",
                 "c:\\Users\\gabri\\OneDrive\\Desktop\\Computer Architectures\\arm\\ep1\\blind_labyrinth\\button_EXINT",
                 "c:\\Users\\gabri\\OneDrive\\Desktop\\Computer Architectures\\arm\\ep1\\blind_labyrinth\\RIT",
-                "c:\\Users\\gabri\\OneDrive\\Desktop\\Computer Architectures\\arm\\ep1\\blind_labyrinth\\timer",
-                "C:\\Users\\gabri\\AppData\\Local\\Arm\\Packs\\Keil\\LPC1700_DFP\\2.6.0\\Device\\Include",
-                "C:\\Users\\gabri\\AppData\\Local\\Arm\\Packs\\ARM\\CMSIS\\5.7.0\\CMSIS\\Core\\Include"
+                "c:\\Users\\gabri\\OneDrive\\Desktop\\Computer Architectures\\arm\\ep1\\blind_labyrinth\\timer"
             ],
             "defines": [
                 "SIMULATOR",
