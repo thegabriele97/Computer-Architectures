@@ -399,6 +399,11 @@
               <FilePath>.\sample.c</FilePath>
             </File>
             <File>
+              <FileName>lab_map.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lab_map.h</FilePath>
+            </File>
+            <File>
               <FileName>blind_labyrinth.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\blind_labyrinth.c</FilePath>
@@ -407,11 +412,6 @@
               <FileName>blind_labyrinth.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\blind_labyrinth.h</FilePath>
-            </File>
-            <File>
-              <FileName>lab_map.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\lab_map.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -506,6 +506,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\joystick\funct_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\joystick\lib_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\joystick\joystick.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>RIT</GroupName>
           <Files>
             <File>
@@ -522,26 +542,6 @@
               <FileName>RIT.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\RIT\RIT.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Joystick</GroupName>
-          <Files>
-            <File>
-              <FileName>funct_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\joystick\funct_joystick.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\joystick\lib_joystick.c</FilePath>
-            </File>
-            <File>
-              <FileName>joystick.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\joystick\joystick.h</FilePath>
             </File>
           </Files>
         </Group>
