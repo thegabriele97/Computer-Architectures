@@ -671,25 +671,11 @@ void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_
       PERSONALIZED EXPOSED FUNCTIONS
 *********************************************************************************************************/
 void LCD_WriteIndexNoInline(uint16_t index) {
-	LCD_CS(0);
-	LCD_RS(0);
-	LCD_RD(1);
-	LCD_Send( index ); 
-	wait_delay(22);	
-	LCD_WR(0);  
-	wait_delay(1);
-	LCD_WR(1);
-	LCD_CS(1);
+	LCD_WriteIndex(index); // It's inline so it's not a true function call: it's faster
 }
 
 void LCD_WriteDataNoInline(uint16_t data) {				
-	LCD_CS(0);
-	LCD_RS(1);   
-	LCD_Send( data );
-	LCD_WR(0);     
-	wait_delay(1);
-	LCD_WR(1);
-	LCD_CS(1);
+	LCD_WriteData(data); // It's inline so it's not a true function call: it's faster
 }
 
 

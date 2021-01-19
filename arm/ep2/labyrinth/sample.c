@@ -47,14 +47,21 @@ int main(void) {
 	init_timer(0, 0x004C4B40);	// 200 ms: RIT is used to move the robot
 	
 	TouchPanel_Calibrate();
-	LCD_Clear(Blue2);
-	GUI_Text(60, 20, (uint8_t *)"Blind Labyrinth", Yellow, Blue2);
+	LCD_Clear(Black);
+	GUI_Text(60, 20, (uint8_t *)"Blind Labyrinth", Yellow, Black);
 	
-	LCD_DrawRect(LCD_START_START_X, LCD_START_START_Y, LCD_START_LENGTH, LCD_START_WIDTH, White);
-	GUI_Text(20, 280, (uint8_t *)"Restart", Blue2, White);
+	LCD_DrawRect(LCD_START_START_X, LCD_START_START_Y, LCD_START_LENGTH, LCD_START_WIDTH, Blue2);
+	LCD_DrawRect(LCD_START_START_X+3, LCD_START_START_Y+3, LCD_START_LENGTH-6, LCD_START_WIDTH-6, Black);
+	GUI_Text(20, 280, (uint8_t *)"Restart", Red, Black);
 	
-	LCD_DrawRect(LCD_CLR_START_X, LCD_CLR_START_Y, LCD_CLR_LENGTH, LCD_CLR_WIDTH, Yellow);
-	GUI_Text(170, 280, (uint8_t *)"Clear", Black, Yellow);
+	LCD_DrawRect(LCD_CLR_START_X, LCD_CLR_START_Y, LCD_CLR_LENGTH, LCD_CLR_WIDTH, Red);
+	LCD_DrawRect(LCD_CLR_START_X+3, LCD_CLR_START_Y+3, LCD_CLR_LENGTH-6, LCD_CLR_WIDTH-6, Black);
+	GUI_Text(170, 280, (uint8_t *)"Clear", Blue2, Black);
+	
+	LCD_DrawRect(0, LCD_MAP_START_Y - 5, 5, 240, Blue);
+	LCD_DrawRect(0, LCD_MAP_START_Y+ 13*15 + 1, 6, 240, Blue);
+	LCD_DrawRect(0, LCD_MAP_START_Y, 13*15 + 6, 7, Blue);
+	LCD_DrawRect(240-6, LCD_MAP_START_Y, 13*15 + 6, 10, Blue);
 	
 	LCD_DrawRect(LCD_MAP_START_X, LCD_MAP_START_Y, 13*15 + 1, 15*15 + 1, LCD_MAP_BKCOLOR);
 	GUI_Text(60, 110, (uint8_t *)"Touch to Start", Red, LCD_MAP_BKCOLOR);

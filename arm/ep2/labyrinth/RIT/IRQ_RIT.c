@@ -93,9 +93,9 @@ void RIT_IRQHandler (void) {
 			} else if (!flags.flags.is_left_pressed && IS_JOYLT_PRESSED()) {
 				joystick_EvtHandler(mode, WEST, &flags, 0x1, true);
 			} else if ((flags.byte & (0xf << 0)) && (LPC_GPIO1->FIOPIN & (flags.byte << 26))) { // Checking if there is some flag at 1 and one of the button released (at 1)
-				joystick_EvtHandler(mode, 0, &flags, 0, false);		// A smart thing: flags.byte contains only a bit at 1 (the current pressed).
-			}																										// This byte can be used as mask to obtain the status of the relative joystick btn pressed!!
-																													// In fact, the bits in the flags.byte are ordered with the same order of btns!!!
+				joystick_EvtHandler(mode, 0, &flags, 0, false);   // A smart thing: flags.byte contains only a bit at 1 (the current pressed).
+			}                                                   // This byte can be used as mask to obtain the status of the relative joystick btn pressed!!
+                                                          // In fact, the bits in the flags.byte are ordered with the same order of btns!!!
 		}
 
 		LCD_DrawSpaceship(LCD_GAMECOL(game), LCD_GAMEROW(game), game.robot.dir_obstacle.direction, mode);
@@ -112,14 +112,14 @@ void RIT_IRQHandler (void) {
 		
 		if (game.robot.dir_obstacle.is_obstacle && WITHIN_INTERVAL(game.robot.obstacle_pos.col, 1, NCOLS-2) && WITHIN_INTERVAL(game.robot.obstacle_pos.row, 1, NROWS-2)) {
 			if (!pos_eq(last_obstacled_drawed, game.robot.obstacle_pos)) {
-				LCD_DrawSpacemonster(LCD_POSCOL(game.robot.obstacle_pos.col - 1), LCD_POSROW(game.robot.obstacle_pos.row - 1), (LPC_RIT->RICOUNTER >> 0) & 0x1);
+				LCD_DrawSpacemonster(LCD_POSCOL(game.robot.obstacle_pos.col - 1), LCD_POSROW(game.robot.obstacle_pos.row - 1), (LPC_TIM0->TC >> 0) & 0x1);
 				last_obstacled_drawed = game.robot.obstacle_pos;
 			}
 		}
 		
 		if (WITHIN_INTERVAL(lcd.x, LCD_CLR_START_X, LCD_CLR_END_X) && WITHIN_INTERVAL(lcd.y, LCD_CLR_START_Y, LCD_CLR_END_Y)) {
-			for (i = 1; i < NROWS - 2; i++) {
-				for (j = 1; j < NCOLS - 2; j++) {
+			for (i = 1; i < NROWS - 1; i++) {
+				for (j = 1; j < NCOLS - 1; j++) {
 					if (game.map[i][j] == OBSTACLE && !(j == game.robot.obstacle_pos.col && i == game.robot.obstacle_pos.row)) {
 						LCD_DrawRect(LCD_POSCOL(j-1), LCD_POSROW(i-1), 16, 16, LCD_MAP_BKCOLOR);
 					}
